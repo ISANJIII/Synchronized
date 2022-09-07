@@ -35,5 +35,6 @@ public class PruebaExcep {
   System.out.println("FIN");
 
  }
+ 
 
 }
