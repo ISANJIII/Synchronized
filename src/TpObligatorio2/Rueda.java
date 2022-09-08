@@ -15,16 +15,18 @@ public class Rueda {
  
  
 
- public synchronized void ocuparRueda() {
+ public  void ocuparRueda() {
+  System.out.println("La rata " + Thread.currentThread().getName() + " ocupo la rueda.");
   rueda = true;
 
  }
 
- public synchronized boolean verEstadoRueda() {
+ public  boolean verEstadoRueda() {
   return rueda;
  }
  
   public void desocuparRueda() {
+   System.out.println("La rata " + Thread.currentThread().getName() + " desocupo la rueda.");
   rueda = false;
 
  }

@@ -5,9 +5,7 @@
  */
 package TpObligatorio2;
 
-import TpSynchronized.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -28,7 +26,7 @@ public class Hamster extends Thread {
   try {
    jl.entrarAJaula(Thread.currentThread().getName());
   } catch (InterruptedException ex) {
-   Logger.getLogger(Hamster.class.getName()).log(Level.SEVERE, null, ex);
+  
   }
 
  }

@@ -5,22 +5,20 @@
  */
 package TpObligatorio2;
 
-import TpSynchronized.*;
-
 /**
  *
  * @author asdf
  */
 public class Jaula {
 
- private Hamaca ham;
- private Plato plat;
- private Rueda rue;
+ private final Hamaca ham;
+ private final Plato plat;
+ private final Rueda rue;
 
  public Jaula() {
-   ham= new Hamaca();
-    plat= new Plato();
-      rue= new Rueda();
+  ham = new Hamaca();
+  plat = new Plato();
+  rue = new Rueda();
  }
 
  public void entrarAJaula(String name) throws InterruptedException {
@@ -29,45 +27,47 @@ public class Jaula {
   boolean act3 = false;
   //si todas actividades hechas se para
   while (!act1 || !act2 || !act3) {
- 
 
    if (!act1) {
-    if (!ham.verEstadoHamaca()) {
-      ham.ocuparHamaca();
-     System.out.println("La rata " + name + " ocupo la hamaca.");
-     Thread.sleep(2000);
-     ham.desocuparHamaca();
-      System.out.println("La rata " + name + " desocupo la hamaca.");
-      
-      
+    synchronized (ham) {
+     if (!ham.verEstadoHamaca()) {
 
-      
-     act1 = true;
+      ham.ocuparHamaca();
+
+      Thread.sleep(1000);
+      ham.desocuparHamaca();
+
+      act1 = true;
+     }
     }
 
    }
 
    if (!act2) {
+    synchronized (plat) {
+     if (!plat.verEstadoPlato()) {
 
-    if (!plat.verEstadoPlato()) {
-     System.out.println("La rata " + name + " ocupo el plato.");
-     plat.ocuparPlato();
-     Thread.sleep(2000);
-        plat.desocuparPlato();
-          System.out.println("La rata " + name + " desocupo el plato.");
-     act2 = true;
+      plat.ocuparPlato();
+      Thread.sleep(1000);
+      plat.desocuparPlato();
+
+      act2 = true;
+
+     }
     }
 
    }
 
    if (!act3) {
-    if (!rue.verEstadoRueda()) {
-     System.out.println("La rata " + name + " ocupo la rueda.");
-     rue.ocuparRueda();
-     Thread.sleep(2000);
-     rue.desocuparRueda();
-           System.out.println("La rata " + name + " desocupo la rueda.");
-     act3 = true;
+    synchronized (rue) {
+     if (!rue.verEstadoRueda()) {
+
+      rue.ocuparRueda();
+      Thread.sleep(1000);
+      rue.desocuparRueda();
+
+      act3 = true;
+     }
     }
 
    }

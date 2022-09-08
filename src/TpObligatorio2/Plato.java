@@ -13,17 +13,19 @@ public class Plato {
 
  private boolean plato = false;
 
- public synchronized void ocuparPlato() {
+ public void ocuparPlato() {
+  System.out.println("La rata " + Thread.currentThread().getName() + " ocupo el plato.");
   plato = true;
 
  }
 
- public synchronized boolean verEstadoPlato() {
+ public boolean verEstadoPlato() {
   return plato;
 
  }
 
- public void desocuparPlato() {
+ public  void desocuparPlato() {
+  System.out.println("La rata " + Thread.currentThread().getName() + " desocupo el plato.");
   plato = false;
 
  }

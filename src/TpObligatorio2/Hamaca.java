@@ -14,16 +14,17 @@ public class Hamaca {
  private boolean hamaca = false;
 
  public void ocuparHamaca() {
+  System.out.println("La rata " + Thread.currentThread().getName() + " ocupo la hamaca.");
   hamaca = true;
-
  }
 
- public synchronized boolean verEstadoHamaca() {
+ public boolean verEstadoHamaca() {
   return hamaca;
 
  }
 
- public synchronized void desocuparHamaca() {
+ public  void desocuparHamaca() {
+System.out.println("La rata " + Thread.currentThread().getName() + " desocupo la hamaca.");
   hamaca = false;
 
  }
