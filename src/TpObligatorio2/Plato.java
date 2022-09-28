@@ -11,22 +11,29 @@ package TpObligatorio2;
  */
 public class Plato {
 
- private boolean plato = false;
+ private boolean plato ;
+ 
+ public Plato(){
+  plato=false;
+ }
 
- public void ocuparPlato() {
+ public synchronized void ocuparPlato()  {
   System.out.println("La rata " + Thread.currentThread().getName() + " ocupo el plato.");
   plato = true;
 
- }
-
- public boolean verEstadoPlato() {
-  return plato;
 
  }
 
- public  void desocuparPlato() {
+ public  synchronized boolean verEstadoPlato() {
+  return !plato;
+
+ }
+
+ public synchronized void desocuparPlato() {
   System.out.println("La rata " + Thread.currentThread().getName() + " desocupo el plato.");
   plato = false;
 
  }
+
+
 }

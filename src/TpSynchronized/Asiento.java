@@ -13,25 +13,34 @@ import java.lang.reflect.Array;
  */
 public class Asiento {
 
- //50 asientos
- private boolean[] asiento;
+    //50 asientos
+    private boolean[] asiento;
 
- public Asiento(boolean[] a) {
-  this.asiento = a;
+    public Asiento(boolean[] a) {
+        this.asiento = a;
 
- }
+    }
 
- public synchronized void ReservarAsiento(int i) {
-  this.asiento[i] = true;
+    public void ReservarAsiento(int i) {
+        this.asiento[i] = true;
 
- }
+    }
 
- public boolean verEstadoDeAsiento(int i) {
-  return asiento[i];
- }
+    public boolean verEstadoDeAsiento(int i) {
+        return asiento[i];
+    }
 
- public int longitudAsientos() {
-  return asiento.length;
- }
+    public int longitudAsientos() {
+        return asiento.length;
+    }
+
+    public synchronized boolean reservar(int nroAsiento) {
+        boolean éxito = false;
+        if (!this.verEstadoDeAsiento(nroAsiento)) {
+            this.ReservarAsiento(nroAsiento);
+            éxito = true;
+        }
+        return (éxito);
+    }
 
 }

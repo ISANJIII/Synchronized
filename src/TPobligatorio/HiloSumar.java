@@ -15,28 +15,34 @@ public  class HiloSumar extends Thread {
      * @param args the command line arguments
      */
     private int min;
-    private int acumActual =0;
+    
     public static int acum = 0;
     private int max;
     private int[] arr;
+    private Datos  d;
 
-    public HiloSumar(int[] arr, int min, int max) {
+    public HiloSumar(int[] arr, int min, int max, Datos dat) {
         this.arr = arr;
         this.min = min;
         this.max = max;
+        this.d=dat;
 
     }
 
     public void run() {
+     int acum=0;
+     
         for (int i = min; i <= max; i++) {
-            System.out.println(i);
-            sumar(arr[i]);
+//            System.out.println(i);
+            acum=acum+arr[i];
         }
+        System.out.println(Thread.currentThread().getName()+"   "+acum+" min "+ min+" max "+ max);
+        
+        d.realizarSuma(acum);
+        
 
     }
 
-    public synchronized void sumar(int valor){
-        acum = acum + valor;
-    }
+ 
 
 }

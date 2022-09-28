@@ -3,27 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TpObligatorio2;
+package TpSynchronized;
 
 /**
  *
  * @author asdf
  */
-public class Hamster extends Thread {
+//  una subclase de auto
+public class Vehiculo extends Auto {
  
- private Jaula j;
- 
- public Hamster(String name, Jaula jl) {
-  super(name);
-  
-  j = jl;
+ public Vehiculo(int patente, int modelo, String marca, double km) {
+  super(patente, modelo, marca, km);
  }
  
- @Override
- public void run() {
-  
-  j.realizarActividad();
-  
- }
+
+
+ 
+
+ 
  
 }

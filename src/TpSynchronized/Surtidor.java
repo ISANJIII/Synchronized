@@ -3,27 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TpObligatorio2;
+package TpSynchronized;
 
 /**
  *
  * @author asdf
  */
-public class Hamster extends Thread {
+public class Surtidor {
  
- private Jaula j;
  
- public Hamster(String name, Jaula jl) {
-  super(name);
-  
-  j = jl;
- }
- 
- @Override
- public void run() {
-  
-  j.realizarActividad();
-  
- }
  
 }

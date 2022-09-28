@@ -16,7 +16,16 @@ public class Ejercicio4 {
  public static void main(String[] args) {
   Scanner sc = new Scanner(System.in);
   // el num 1 significa hamaca
-  Jaula jl = new Jaula();
+  Rueda r = new Rueda();
+  Plato p=new Plato();
+  Hamaca h= new Hamaca();
+  
+ Jaula jl= new Jaula(h,r,p);
+  
+  
+  
+  
+  
 
   Hamster rata1 = new Hamster("Guille", jl);
   Hamster rata2 = new Hamster("Cris", jl);

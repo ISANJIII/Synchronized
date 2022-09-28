@@ -3,27 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package TpObligatorio2;
+package practica;
 
 /**
  *
  * @author asdf
  */
-public class Hamster extends Thread {
+public class main {
+  public static void main(String[] args) {
+  // TODO code application logic here
  
- private Jaula j;
+  Hilo a= new Hilo("Hilo 1",10);
  
- public Hamster(String name, Jaula jl) {
-  super(name);
+  Hilo b= new Hilo("Hilo 2",1);
+ 
+  a.start();
+  b.start();
   
-  j = jl;
- }
- 
- @Override
- public void run() {
-  
-  j.realizarActividad();
-  
- }
- 
+  }
 }

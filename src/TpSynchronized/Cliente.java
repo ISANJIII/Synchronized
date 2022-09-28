@@ -14,42 +14,26 @@ import java.util.logging.Logger;
  */
 public class Cliente implements Runnable {
 
- private Asiento silla;
- private String nombre;
- private int reserva;
+    private Asiento silla;
+    private String nombre;
+    private int reserva;
 
- public Cliente(String name, int asiento, Asiento a) {
-  this.nombre = name;
-  this.reserva = asiento;
-  this.silla = a;
- }
+    public Cliente(String name, int asiento, Asiento a) {
+        this.nombre = name;
+        this.reserva = asiento;
+        this.silla = a;
+    }
 
- @Override
- public void run() {
- 
-  try {
-   Thread.sleep(1000);
-   hacerReserva(reserva);
+    @Override
+    public void run() {
 
-  } catch (InterruptedException ex) {
-   Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-  }
+        if (silla.reservar(reserva)) {
+            System.out.println(Thread.currentThread().getName() + " reservo");
+        } else {
+            System.out.println(Thread.currentThread().getName() + " no reservo");
 
- }
+        }
 
- private synchronized void hacerReserva(int i) throws InterruptedException {
-  if (i >= 0 && i < silla.longitudAsientos()) {
+    }
 
-   if (!silla.verEstadoDeAsiento(i)) {
-
-    silla.ReservarAsiento(i);
-    System.out.println("El Cliente " + nombre + " pudo realizar la reserva del asiento " + reserva);
-    System.out.println(silla.verEstadoDeAsiento(i));
-   } else {
-
-    System.out.println("El Cliente " + nombre + " No pudo realizar la reserva del asiento " + reserva);
-   }
-  }
-
- }
 }

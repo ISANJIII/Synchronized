@@ -11,24 +11,30 @@ package TpObligatorio2;
  */
 public class Rueda {
 
- private boolean rueda = false;
+ private boolean rueda ;
  
  
+ public Rueda(){
+  rueda=false;
+ }
 
- public  void ocuparRueda() {
+ public synchronized void ocuparRueda(){
+
   System.out.println("La rata " + Thread.currentThread().getName() + " ocupo la rueda.");
   rueda = true;
-
- }
-
- public  boolean verEstadoRueda() {
-  return rueda;
- }
  
-  public void desocuparRueda() {
-   System.out.println("La rata " + Thread.currentThread().getName() + " desocupo la rueda.");
+ }
+
+ public  synchronized boolean verEstadoRueda() {
+  return !rueda;
+ }
+
+ public synchronized void desocuparRueda() {
+  System.out.println("La rata " + Thread.currentThread().getName() + " desocupo la rueda.");
   rueda = false;
 
  }
+
+
 
 }

@@ -5,72 +5,71 @@
  */
 package TpObligatorio2;
 
+import java.util.Random;
+
 /**
  *
  * @author asdf
  */
 public class Jaula {
 
- private final Hamaca ham;
- private final Plato plat;
- private final Rueda rue;
+ private Hamaca h;
+ private Rueda r;
+ private Plato p;
 
- public Jaula() {
-  ham = new Hamaca();
-  plat = new Plato();
-  rue = new Rueda();
+ public Jaula(Hamaca h, Rueda r, Plato p) {
+  this.h = h;
+  this.r = r;
+  this.p = p;
+
  }
 
- public void entrarAJaula(String name) throws InterruptedException {
-  boolean act1 = false;
-  boolean act2 = false;
-  boolean act3 = false;
-  //si todas actividades hechas se para
-  while (!act1 || !act2 || !act3) {
+ public void realizarActividad() {
 
-   if (!act1) {
-    synchronized (ham) {
-     if (!ham.verEstadoHamaca()) {
 
-      ham.ocuparHamaca();
+  boolean b = true, c = true, d = true;
+  try {
+   while (b && c && d) {
+    Random x = new Random(2);
+    int num = x.nextInt(3);
+    switch (num) {
 
-      Thread.sleep(1000);
-      ham.desocuparHamaca();
+     case 0:
+      if (b && h.verEstadoHamaca()) {
+       h.ocuparHamaca();
+       Thread.sleep(1000);
+       h.desocuparHamaca();
+       b=false;
+       
+      }
 
-      act1 = true;
-     }
+      ;
+      break;
+     case 1:
+      if (c && r.verEstadoRueda()) {
+       r.ocuparRueda();
+       Thread.sleep(1000);
+       r.desocuparRueda();
+       c=false;
+      }
+
+      ;
+      break;
+     case 2:
+      if (d && p.verEstadoPlato()) {
+       p.ocuparPlato();
+       Thread.sleep(1000);
+       p.desocuparPlato();
+       d=false;
+      }
+
+      ;
+      break;
+
     }
 
    }
-
-   if (!act2) {
-    synchronized (plat) {
-     if (!plat.verEstadoPlato()) {
-
-      plat.ocuparPlato();
-      Thread.sleep(1000);
-      plat.desocuparPlato();
-
-      act2 = true;
-
-     }
-    }
-
-   }
-
-   if (!act3) {
-    synchronized (rue) {
-     if (!rue.verEstadoRueda()) {
-
-      rue.ocuparRueda();
-      Thread.sleep(1000);
-      rue.desocuparRueda();
-
-      act3 = true;
-     }
-    }
-
-   }
+  } catch (InterruptedException e) {
 
   }
 

@@ -11,21 +11,29 @@ package TpObligatorio2;
  */
 public class Hamaca {
 
- private boolean hamaca = false;
+ private boolean hamaca ;
+ 
+ public Hamaca(){
+  hamaca=false;
+ }
 
- public void ocuparHamaca() {
+ public synchronized void ocuparHamaca() {
   System.out.println("La rata " + Thread.currentThread().getName() + " ocupo la hamaca.");
   hamaca = true;
- }
 
- public boolean verEstadoHamaca() {
-  return hamaca;
 
  }
 
- public  void desocuparHamaca() {
-System.out.println("La rata " + Thread.currentThread().getName() + " desocupo la hamaca.");
+ public  synchronized boolean verEstadoHamaca() {
+  return !hamaca;
+ }
+
+ public synchronized void desocuparHamaca() {
+  System.out.println("La rata " + Thread.currentThread().getName() + " desocupo la hamaca.");
   hamaca = false;
 
  }
+
+
+
 }
