@@ -1,4 +1,4 @@
-package barberoDormilon;
+package Barbero;
 
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;

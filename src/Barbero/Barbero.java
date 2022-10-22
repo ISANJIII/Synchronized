@@ -1,4 +1,4 @@
-package barberoDormilon;
+package Barbero;
 
 public class Barbero extends Thread {
 
