@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ObligatorioMonitores;
-
 
 /**
  *
@@ -12,7 +7,7 @@ package ObligatorioMonitores;
 public class Buque extends Thread {
 
     private Lugares lugares;
-    private int i=0;
+    private int i = 0;
 
     public Buque(Lugares lug) {
         lugares = lug;
@@ -23,23 +18,14 @@ public class Buque extends Thread {
 
         while (true) {
 
-            synchronized (lugares) {
-
-                if (i==10) {
-
-                    ir();
-                    
-                    
-
-                    volver();
-                      for (int i = 0; i < 10; i++) {
-                    lugares.notify();      
-                    }
-                      
-                  
-
-                }
-
+            if(lugares.buqueLLeno()){
+                ir();
+                
+                volver();   
+                System.out.println("___________________________________________");
+                lugares.vaciar();
+               
+                
             }
 
         }

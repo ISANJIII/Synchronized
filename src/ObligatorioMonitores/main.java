@@ -4,18 +4,25 @@
  */
 package ObligatorioMonitores;
 
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author asdf
  */
 public class main {
      public static void main(String[] args) {
-      int total=40;
+      
+
+             
+      int total=55;
          Lugares lug= new Lugares();
          
          Buque  buque= new Buque(lug);
          Auto[] autos= new Auto[total];
-    
+
          
          for (int i = 0; i < total; i++) {
              autos[i]= new Auto(lug);
@@ -24,6 +31,7 @@ public class main {
          for (int i = 0; i < total; i++) {
              autos[i].start();
          }
+        
          
          
 

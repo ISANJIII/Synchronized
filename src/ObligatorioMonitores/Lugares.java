@@ -1,6 +1,8 @@
-
 package ObligatorioMonitores;
 
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -9,36 +11,54 @@ package ObligatorioMonitores;
 public class Lugares {
 
     private final int tamanio = 10;
+    private Semaphore sem;
 
     private int pos = 0;
 
     public Lugares() {
+        sem= new Semaphore(0);
 
     }
 
-    public boolean agregar() {
+    public synchronized boolean agregar() {
 
         boolean seAgrego = false;
         if (pos < tamanio) {
-
-            seAgrego = true;
-
+            sem.release(1);
+            pos++;
+            seAgrego=true;
         }
-        pos++;
+        
 
         return seAgrego;
     }
 
-    public boolean buqueLLeno() {
+    public synchronized boolean buqueLLeno() {
         boolean lleno = false;
-        if (pos == tamanio) {
-            lleno = true;
-
+        
+        if(pos==tamanio){
+            
+        
+            
+            try {
+               
+                sem.acquire(10);
+                
+                lleno = true;
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Lugares.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
+        
         return lleno;
     }
 
     public int getTamanio() {
         return tamanio;
+    }
+    public  void vaciar(){
+        pos=0;
+        
     }
 }

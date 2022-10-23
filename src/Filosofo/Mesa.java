@@ -58,6 +58,8 @@ public class Mesa {
     tomarCucharaIzq(lugar - 1);
       System.out.println("pudo tomar la cuchara izquierda "+ lugar);
    }
+// el reloj va a tener un posicion que es uno random dentro de la cantidad de hilos durmientes (estos tienen la posicion del arreglo del durmiente) y solo despierte uno random tipo izqueirda o derecha, y cada hilo durmiente ve si es su horario o no 
+
 
   }
  }
