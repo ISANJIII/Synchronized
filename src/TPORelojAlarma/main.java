@@ -3,13 +3,13 @@ package TPORelojAlarma;
 
 /**
  *
- * @author cristopher.ovaillos
+ * @author Cristopher.Ovaillos
  */
 public class main {
     
     
     public static void main(String[]args){
-        int cantDurmientes=2;
+        int cantDurmientes=5;
         
         RelojCompartido r= new RelojCompartido(cantDurmientes);
         

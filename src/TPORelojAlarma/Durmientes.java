@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author asdf
+ * @author Cristopher.Ovaillos
  */
 public class Durmientes extends Thread {
     
