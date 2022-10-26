@@ -18,18 +18,21 @@ public class Durmientes extends Thread {
     private int horaDespertarse;
     private RelojCompartido r;
     private boolean cercanoAReloj;
+    private int pos;
     
-    public Durmientes(RelojCompartido r, boolean c) {
+    public Durmientes(RelojCompartido r, boolean c,int pos) {
         //los hilos se pueden despertar dentro de las 5 am o 8 am
-        horaDespertarse = (x.nextInt(3)) + 5;
+        horaDespertarse = (x.nextInt(3)) + 6;
         this.r = r;
         cercanoAReloj = c;
+        this.pos=pos;
+       
     }
     
     public void run() {
         
       while(true){
-        if(r.verHora(horaDespertarse,Thread.currentThread().getName())){
+        if(r.verHora(horaDespertarse,pos)){
            
         }    
         

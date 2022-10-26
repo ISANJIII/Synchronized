@@ -13,7 +13,8 @@ public class RelojCompartido {
     private int cantDurmientes;
     private int contadorVerificarHora;
     private int hora;
-    private Semaphore termino;
+
+    private boolean[] a;
 
     public RelojCompartido(int cant) {
         /*necesito saber cuantos hilos durmientes existen
@@ -22,73 +23,62 @@ public class RelojCompartido {
         cantDurmientes = cant;
         contadorVerificarHora = 0;
         hora = 0;
-        termino = new Semaphore(0);
 
+        a = new boolean[cant];
+
+    }
+
+    public synchronized void reiniciarArreglo() {
+        //se reiniciara a las 24 horas
+        for (int i = 0; i < cantDurmientes; i++) {
+            a[i] = false;
+        }
     }
 
     public synchronized void cambiarHora(int nuevaHora) {
-        boolean todos = false;
-        while (!todos) {
-
-            try {
-                //para cambiar la hora necesito que todos los hilos durmientes ya hayan mirado su hora
-                termino.acquire(cantDurmientes);
-                //cuando termino de ver todas las horas los hilos durmientes que ya hayan mirado su hora  estos pasan a un estado de espero 
-                //con esto notificamos a todos que pueden seguir verificando la hora
-                this.notify();
-                contadorVerificarHora++;
-            } catch (InterruptedException ex) {
-                Logger.getLogger(RelojCompartido.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            todos = true;
-
-        }
-
+        this.notify();
         contadorVerificarHora = 0;
         hora = nuevaHora;
-
     }
 
-    public synchronized boolean verHora(int i, String nam) {
+    public synchronized boolean verHora(int i, int n) {
 
         boolean desperto = false;
         //indico que el hilo durmiente entro a este metodo para dar un permiso al cambiarHora que es usado por el reloj para indicar que puede ver la hora ya que todos los vieron
 //        System.out.println("--");
 
         //ya deberian estar todos despiertos despues de las 8 am
-        if(hora>8){
-            termino.release(cantDurmientes);
-        }else{
-           
-            //libero un permiso para "cambiarHora()"
-        termino.release();
-        try {
-            //luego de avisar que ya mire la hora paso a espera hasta que todos los hilos ya hayan mirado esto
-            this.wait();
+        if (hora > 7 || hora < 5) {
+        } else {
+            try {
+                //luego de avisar que ya mire la hora paso a espera hasta que todos los hilos ya hayan mirado esto
+                this.wait();
 
-        } catch (InterruptedException ex) {
-            Logger.getLogger(RelojCompartido.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (InterruptedException ex) {
+            }
 
-        //Cada hilo se levanta y despierta a su vecino y chequea si es su hora
-        if (contadorVerificarHora < cantDurmientes) {
-            System.out.println("             Se despierta "+nam+" y avisa a su vecino.");
-            contadorVerificarHora++;
-            //despierto a mi vecino
-            this.notify();
+            //Cada hilo se levanta y despierta a su vecino y chequea si es su hora
+            if (contadorVerificarHora < cantDurmientes) {
 
-            //veo si es mi hora
-            if (hora == i) {
-                System.out.println("             Es mi HORA " + nam + " salgo a trabajar el hilo...."+nam);
-                desperto = true;
-            } else {
-                //de lo contrario vuelvo a dormir
-                System.out.println("             vuelvo a dormir"+nam);
+                contadorVerificarHora++;
+                //despierto a mi vecino    
+                this.notify();
+                if (!a[n]) {
 
+                    System.out.println("             Se despierta el hilo " + n + "| HORA DE ALARMA " + i + " y avisa a su vecino.");
+                    //veo si es mi hora
+                    if (hora == i) {
+                        System.out.println("    Es HORA del hilo " + n + " sale a trabajar.");
+                        desperto = true;
+                        a[n] = true;
+                    } else {
+                        //de lo contrario vuelvo a dormir
+                        System.out.println("             Vuelve a dormir el hilo " + n + " : La hora es " + hora + "  se despierta a  las " + i);
+                    }
+
+                }
             }
         }
-        }
-        
 
         return desperto;
 

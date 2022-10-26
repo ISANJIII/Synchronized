@@ -33,12 +33,13 @@ public class Reloj extends Thread {
             
             try {
                 if (hora == 24) {
+                    rej.reiniciarArreglo();
                     hora = 0;
                 } else {                    
-                    System.out.println("La hora es: " + hora);
-                    hora++;                    
+                   System.out.println("La hora es: " + hora);
+                                      
                     rej.cambiarHora(hora);
-                    
+                  hora++;  
                 }
 
                 //cada segundo es una 1 hora
@@ -49,4 +50,5 @@ public class Reloj extends Thread {
             
         }
     }
+   
 }
